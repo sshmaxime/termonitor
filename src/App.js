@@ -1,43 +1,34 @@
+// Import React components
 import React, { Component } from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import ToDO from "./pages/todo";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Provider as ReduxProvider } from "react-redux";
+import { Redirect } from "react-router";
+
+// Import Redux components
 import configureStore from "./modules/store";
+
+// Import our components
+import Home from "./pages/Home";
+import Dashboard from "./pages/Dashboard";
 
 const reduxStore = configureStore(window.REDUX_INITIAL_DATA);
 
 class App extends Component {
+  componentDidMount() {
+    Redirect("/");
+  }
   render() {
     return (
       <ReduxProvider store={reduxStore}>
-        <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <h1 className="App-title">ToDo Redux app</h1>
-          </header>
-          <ToDO />
-        </div>
+        <Router>
+          <div className="App">
+            <Route path="/" exact component={Home} />
+            <Route path="/dashboard" exact component={Dashboard} />
+          </div>
+        </Router>
       </ReduxProvider>
     );
   }
 }
 
 export default App;
-
-
-
-// import React from 'react';
-// import './App.css';
-// import Loading from './components/Loading'
-// import ToDO from './components/Dashboard'
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <ToDO></ToDO>
-//     </div>
-//   );
-// }
-
-// export default App;
