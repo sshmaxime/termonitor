@@ -1,12 +1,8 @@
-// Import React components
 import React, { Component } from "react";
-//import { Redirect } from "react-router-dom";
 
-// Import Redux components
-import { connect } from "react-redux";
-
-// Import Material UI
 import { withStyles } from "@material-ui/core";
+
+import { connect } from "react-redux";
 
 // Import CSS
 import style from "./css.js";

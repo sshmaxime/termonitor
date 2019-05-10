@@ -1,10 +1,12 @@
 // Import React components
 import React, { Component } from "react";
-//import { Redirect } from "react-router-dom";
 
 // Import Redux components
 import { connect } from "react-redux";
 import ACTIONS from "../modules/action";
+
+// Import Routes
+import Routes from "../route";
 
 // Import Material UI
 import {
@@ -25,13 +27,14 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import style from "./css.js";
 
 class Home extends Component {
+  state = { username: "" };
   handleSubmit = event => {
     if (this.state.username !== "") {
       this.props.updateUsername(this.state.username);
+      this.props.updateRoute(Routes.DASHBOARD);
     }
     event.preventDefault();
   };
-
   handleChange = event => {
     this.setState({
       [event.target.name]: event.target.value
@@ -71,11 +74,13 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => ({
-  username: state.username
+  username: state.username,
+  route: state.route
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateUsername: username => dispatch(ACTIONS.updateUsername(username))
+  updateUsername: username => dispatch(ACTIONS.updateUsername(username)),
+  updateRoute: route => dispatch(ACTIONS.updateRoute(route))
 });
 
 export default connect(

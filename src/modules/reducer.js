@@ -3,7 +3,8 @@ import _ from "lodash";
 
 const initialState = {
   username: "",
-  ethermineAddr: ""
+  ethermineAddr: "",
+  route: "/"
 };
 
 const globalReducer = (state = initialState, action) => {
@@ -12,6 +13,12 @@ const globalReducer = (state = initialState, action) => {
       let newUsername = action.payload;
       let newState = _.cloneDeep(state);
       newState.username = newUsername;
+      return newState;
+    }
+    case ACTIONS.Types.UPDATE_ROUTE: {
+      let newRoute = action.payload;
+      let newState = _.cloneDeep(state);
+      newState.route = newRoute;
       return newState;
     }
     default:

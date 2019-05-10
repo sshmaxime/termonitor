@@ -1,10 +1,6 @@
 // Import React components
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-
-// Import Redux components
-import configureStore from "./modules/store";
-import { Provider as ReduxProvider } from "react-redux";
+import { connect } from "react-redux";
 
 // Import Material UI
 import { withStyles } from "@material-ui/core";
@@ -15,9 +11,6 @@ import Dashboard from "./pages/Dashboard";
 
 // Import Routes
 import Routes from "./route";
-
-// Create Redux store
-const reduxStore = configureStore(window.REDUX_INITIAL_DATA);
 
 const style = theme => ({
   app: {
@@ -32,18 +25,17 @@ const style = theme => ({
 class App extends Component {
   render() {
     const { classes } = this.props;
-
     return (
       <div className={classes.app}>
-        <ReduxProvider store={reduxStore}>
-          <Router>
-            <Route exact path={Routes.HOME} component={Home} />
-            <Route path={Routes.DASHBOARD} component={Dashboard} />
-          </Router>
-        </ReduxProvider>
+        {this.props.route === Routes.HOME ? <Home /> : null}
+        {this.props.route === Routes.DASHBOARD ? <Dashboard /> : null}
       </div>
     );
   }
 }
 
-export default withStyles(style)(App);
+const mapStateToProps = state => ({
+  route: state.route
+});
+
+export default connect(mapStateToProps)(withStyles(style)(App));
