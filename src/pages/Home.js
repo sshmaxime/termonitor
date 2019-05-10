@@ -1,39 +1,34 @@
+// Import React components
 import React, { Component } from "react";
+//import { Redirect } from "react-router-dom";
+
+// Import Redux components
 import { connect } from "react-redux";
 import ACTIONS from "../modules/action";
 
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import InputLabel from "@material-ui/core/InputLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Input from "@material-ui/core/Input";
-
+// Import Material UI
 import {
+  InputLabel,
+  Input,
+  Avatar,
+  Typography,
+  FormControlLabel,
+  Checkbox,
   withStyles,
-  List,
-  ListItem,
-  ListItemSecondaryAction,
-  ListItemText,
-  IconButton,
-  Grid,
-  TextField,
   Button,
   FormControl,
   Paper
 } from "@material-ui/core";
-import { red } from "@material-ui/core/colors";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
-const style = themes => ({
-  login: {
-    width: "50%",
-    textAlign: "center"
-  }
-});
+// Import CSS
+import style from "./css.js";
 
 class Home extends Component {
-  state = { username: "" };
-
   handleSubmit = event => {
-    this.props.updateUsername(this.state.username);
+    if (this.state.username !== "") {
+      this.props.updateUsername(this.state.username);
+    }
     event.preventDefault();
   };
 
@@ -46,42 +41,31 @@ class Home extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <div>
-        <Paper className={classes.login}>
-          <form noValidate autoComplete="off" onSubmit={this.handleSubmit}>
-            <FormControl>
-              <TextField
-                label="New Task"
-                id="margin-dense"
-                value={this.state.username}
-                margin="dense"
-                name="username"
-                onChange={this.handleChange}
-              />
-            </FormControl>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="email">Email Address</InputLabel>
-              <Input id="email" name="email" autoComplete="email" autoFocus />
-            </FormControl>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="password">Password</InputLabel>
-              <Input
-                name="password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              />
-            </FormControl>
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
+      <Paper className={classes.login}>
+        <form noValidate autoComplete="off" onSubmit={this.handleSubmit}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography variant="h5" align="center">
+            Sign in
+          </Typography>
+          <FormControl margin="normal" fullWidth>
+            <InputLabel>Username</InputLabel>
+            <Input
+              name="username"
+              autoComplete="username"
+              onChange={this.handleChange}
             />
-            <Button type="submit" fullWidth variant="contained" color="primary">
-              Sign in
-            </Button>
-          </form>
-        </Paper>
-      </div>
+          </FormControl>
+          <FormControlLabel
+            control={<Checkbox value="remember" color="primary" />}
+            label="Remember me"
+          />
+          <Button type="submit" fullWidth variant="contained" color="primary">
+            Sign in
+          </Button>
+        </form>
+      </Paper>
     );
   }
 }

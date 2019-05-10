@@ -2,7 +2,8 @@ import ACTIONS from "./action";
 import _ from "lodash";
 
 const initialState = {
-  userName: ""
+  username: "",
+  ethermineAddr: ""
 };
 
 const globalReducer = (state = initialState, action) => {
@@ -10,7 +11,7 @@ const globalReducer = (state = initialState, action) => {
     case ACTIONS.Types.UPDATE_USERNAME: {
       let newUsername = action.payload;
       let newState = _.cloneDeep(state);
-      newState.userName = newUsername;
+      newState.username = newUsername;
       return newState;
     }
     default:

@@ -1,44 +1,28 @@
+// Import React components
 import React, { Component } from "react";
+//import { Redirect } from "react-router-dom";
 
-import {
-    withStyles,
-    List,
-    ListItem,
-    ListItemSecondaryAction,
-    ListItemText,
-    IconButton,
-    Grid,
-    TextField,
-    Button,
-    FormControl
-  } from "@material-ui/core";
-
+// Import Redux components
 import { connect } from "react-redux";
-import ACTIONS from "../modules/action";
 
+// Import Material UI
+import { withStyles } from "@material-ui/core";
 
-const styles = theme => ({
-
-});
+// Import CSS
+import style from "./css.js";
 
 class Dashboard extends Component {
-    state = {};
-    render() {
-        return (
-            <div>
-                dashd
-            </div>
-        );
-      }
+  state = {};
+  render() {
+    return <div />;
+  }
 }
 
-const mapStateToProps = state => ({
-});
-  
-const mapDispatchToProps = dispatch => ({
-});
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = dispatch => ({});
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(withStyles(styles)(Dashboard));;
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(style)(Dashboard));
