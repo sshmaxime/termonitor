@@ -10,7 +10,14 @@ const style = theme => ({
     margin: "0 auto",
     marginBottom: theme.spacing.unit,
     backgroundColor: theme.palette.secondary.main
-  }
+  },
+  dashboard: {
+    backgroundColor: "red",
+    borderRadius: "10px",
+    padding: theme.spacing.unit
+  },
+  dashboardItem: {},
+  dashboardItemElem: {}
 });
 
 export default style;

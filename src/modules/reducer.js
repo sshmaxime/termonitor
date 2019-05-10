@@ -4,7 +4,7 @@ import _ from "lodash";
 const initialState = {
   username: "",
   ethermineAddr: "",
-  route: "/"
+  route: "/dashboard"
 };
 
 const globalReducer = (state = initialState, action) => {
