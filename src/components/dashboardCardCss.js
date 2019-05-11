@@ -1,10 +1,10 @@
 const style = theme => ({
   card: {
     backgroundColor: "#27293d",
-    padding: "7%"
+    padding: theme.spacing.unit
   },
   cardHeaderContainer: {
-    marginBottom: "5%"
+    marginBottom: theme.spacing.unit
   },
   cardHeaderTitle: {
     display: "flex",
@@ -13,11 +13,13 @@ const style = theme => ({
     fontWeight: "200"
   },
   cardHeaderLogo: {
-    width: "6vh",
-    height: "6vh"
+    width: "15%",
+    height: "15%",
+    minWidth: "35px",
+    minheight: "35px"
   },
   cardContentContainer: {
-    marginTop: "10%"
+    marginTop: theme.spacing.unit * 2
   },
   cardContentTitle: {
     textAlign: "center",
@@ -25,7 +27,7 @@ const style = theme => ({
     color: "white"
   },
   divider: {
-    height: "0.1em"
+    height: "0.15em"
   }
 });
 

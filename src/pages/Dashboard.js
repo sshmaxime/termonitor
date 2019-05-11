@@ -27,7 +27,7 @@ import {
 
 import { ReactComponent as LogoHashrate } from "./../img/hashrate.svg";
 import { ReactComponent as LogoMiners } from "./../img/miners.svg";
-import { ReactComponent as LogoMoney } from "./../img/money.svg";
+import { ReactComponent as LogoBalance } from "./../img/money.svg";
 
 import DashboardCard from "./../components/dashboardCard";
 
@@ -41,59 +41,27 @@ class Dashboard extends Component {
     return (
       <div className={classes.dashboard}>
         <Grid container spacing={24}>
-          <DashboardCard logo={LogoHashrate} />
-          <Grid item sm={4} xs={12}>
-            <Paper className={classes.dashboardItem}>
-              <Grid
-                justify="space-between"
-                container
-                className={classes.dashboardItemHeaderContainer}
-              >
-                <Typography
-                  className={classes.dashboardItemHeaderTitle}
-                  variant="h5"
-                >
-                  Miners
-                </Typography>
-                <LogoMiners className={classes.dashboardItemHeaderLogo} />
-              </Grid>
-              <Divider className={classes.divider} />
-              <Grid className={classes.dashboardItemContentContainer}>
-                <Typography
-                  className={classes.dashboardItemContentTitle}
-                  variant="h6"
-                >
-                  1001
-                </Typography>
-              </Grid>
-            </Paper>
-          </Grid>
-          <Grid item sm={4} xs={12}>
-            <Paper className={classes.dashboardItem}>
-              <Grid
-                justify="space-between"
-                container
-                className={classes.dashboardItemHeaderContainer}
-              >
-                <Typography
-                  className={classes.dashboardItemHeaderTitle}
-                  variant="h5"
-                >
-                  Money
-                </Typography>
-                <LogoMoney className={classes.dashboardItemHeaderLogo} />
-              </Grid>
-              <Divider className={classes.divider} />
-              <Grid className={classes.dashboardItemContentContainer}>
-                <Typography
-                  className={classes.dashboardItemContentTitle}
-                  variant="h6"
-                >
-                  1001
-                </Typography>
-              </Grid>
-            </Paper>
-          </Grid>
+          <DashboardCard
+            logo={LogoHashrate}
+            title={"Hashrate"}
+            content={"1000"}
+            xs={12}
+            sm={4}
+          />
+          <DashboardCard
+            logo={LogoMiners}
+            title={"Miners"}
+            content={"1000"}
+            xs={12}
+            sm={4}
+          />
+          <DashboardCard
+            logo={LogoBalance}
+            title={"Balance"}
+            content={"1000"}
+            xs={12}
+            sm={4}
+          />
         </Grid>
       </div>
     );

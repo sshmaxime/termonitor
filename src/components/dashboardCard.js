@@ -15,7 +15,7 @@ class DashboardCard extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <Grid item sm={4} xs={12}>
+      <Grid item sm={this.props.sm} xs={this.props.xs}>
         <Paper className={classes.card}>
           <Grid
             justify="space-between"
@@ -23,14 +23,14 @@ class DashboardCard extends Component {
             className={classes.cardHeaderContainer}
           >
             <Typography className={classes.cardHeaderTitle} variant="h5">
-              Hashrate
+              {this.props.title}
             </Typography>
             <this.props.logo className={classes.cardHeaderLogo} />
           </Grid>
           <Divider className={classes.divider} />
           <Grid className={classes.cardContentContainer}>
             <Typography className={classes.cardContentTitle} variant="h6">
-              1001
+              {this.props.content}
             </Typography>
           </Grid>
         </Paper>
