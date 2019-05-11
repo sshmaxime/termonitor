@@ -20,21 +20,29 @@ const style = theme => ({
     backgroundColor: "#27293d",
     padding: "7%"
   },
-  dashboardItemTitle: {
+  dashboardItemHeaderContainer: {
+    marginBottom: "5%"
+  },
+  dashboardItemHeaderTitle: {
     display: "flex",
     alignItems: "center",
     color: "white",
     fontWeight: "200"
   },
-  dashboardItemLogo: {
+  dashboardItemHeaderLogo: {
     width: "6vh",
     height: "6vh"
   },
-  dashboardItemHeader: {
-    marginBottom: "5%"
-  },
   divider: {
     height: "0.1em"
+  },
+  dashboardItemContentContainer: {
+    marginTop: "10%"
+  },
+  dashboardItemContentTitle: {
+    textAlign: "center",
+    fontWeight: "500",
+    color: "white"
   }
 });
 

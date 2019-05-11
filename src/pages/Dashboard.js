@@ -29,6 +29,8 @@ import { ReactComponent as LogoHashrate } from "./../img/hashrate.svg";
 import { ReactComponent as LogoMiners } from "./../img/miners.svg";
 import { ReactComponent as LogoMoney } from "./../img/money.svg";
 
+import DashboardCard from "./../components/dashboardCard";
+
 // Import CSS
 import style from "./css.js";
 
@@ -39,34 +41,31 @@ class Dashboard extends Component {
     return (
       <div className={classes.dashboard}>
         <Grid container spacing={24}>
+          <DashboardCard logo={LogoHashrate} />
           <Grid item sm={4} xs={12}>
             <Paper className={classes.dashboardItem}>
               <Grid
                 justify="space-between"
                 container
-                className={classes.dashboardItemHeader}
+                className={classes.dashboardItemHeaderContainer}
               >
-                <Typography className={classes.dashboardItemTitle} variant="h5">
-                  Hashrate
-                </Typography>
-                <LogoHashrate className={classes.dashboardItemLogo} />
-              </Grid>
-              <Divider className={classes.divider} />
-            </Paper>
-          </Grid>
-          <Grid item sm={4} xs={12}>
-            <Paper className={classes.dashboardItem}>
-              <Grid
-                justify="space-between"
-                container
-                className={classes.dashboardItemHeader}
-              >
-                <Typography className={classes.dashboardItemTitle} variant="h5">
+                <Typography
+                  className={classes.dashboardItemHeaderTitle}
+                  variant="h5"
+                >
                   Miners
                 </Typography>
-                <LogoMiners className={classes.dashboardItemLogo} />
+                <LogoMiners className={classes.dashboardItemHeaderLogo} />
               </Grid>
               <Divider className={classes.divider} />
+              <Grid className={classes.dashboardItemContentContainer}>
+                <Typography
+                  className={classes.dashboardItemContentTitle}
+                  variant="h6"
+                >
+                  1001
+                </Typography>
+              </Grid>
             </Paper>
           </Grid>
           <Grid item sm={4} xs={12}>
@@ -74,14 +73,25 @@ class Dashboard extends Component {
               <Grid
                 justify="space-between"
                 container
-                className={classes.dashboardItemHeader}
+                className={classes.dashboardItemHeaderContainer}
               >
-                <Typography className={classes.dashboardItemTitle} variant="h5">
+                <Typography
+                  className={classes.dashboardItemHeaderTitle}
+                  variant="h5"
+                >
                   Money
                 </Typography>
-                <LogoMoney className={classes.dashboardItemLogo} />
+                <LogoMoney className={classes.dashboardItemHeaderLogo} />
               </Grid>
               <Divider className={classes.divider} />
+              <Grid className={classes.dashboardItemContentContainer}>
+                <Typography
+                  className={classes.dashboardItemContentTitle}
+                  variant="h6"
+                >
+                  1001
+                </Typography>
+              </Grid>
             </Paper>
           </Grid>
         </Grid>
