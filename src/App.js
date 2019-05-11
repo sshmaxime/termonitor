@@ -14,7 +14,7 @@ import Routes from "./route";
 
 const style = theme => ({
   app: {
-    "background-color": "#040608",
+    "background-color": "#1e1e2f",
     position: "absolute",
     height: "100%",
     width: "100%",

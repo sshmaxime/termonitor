@@ -12,12 +12,30 @@ const style = theme => ({
     backgroundColor: theme.palette.secondary.main
   },
   dashboard: {
-    backgroundColor: "red",
     borderRadius: "10px",
-    padding: theme.spacing.unit
+    padding: theme.spacing.unit,
+    backgroundColor: ""
   },
-  dashboardItem: {},
-  dashboardItemElem: {}
+  dashboardItem: {
+    backgroundColor: "#27293d",
+    padding: "7%"
+  },
+  dashboardItemTitle: {
+    display: "flex",
+    alignItems: "center",
+    color: "white",
+    fontWeight: "200"
+  },
+  dashboardItemLogo: {
+    width: "6vh",
+    height: "6vh"
+  },
+  dashboardItemHeader: {
+    marginBottom: "5%"
+  },
+  divider: {
+    height: "0.1em"
+  }
 });
 
 export default style;

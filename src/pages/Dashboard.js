@@ -20,8 +20,14 @@ import {
   Grid,
   Button,
   FormControl,
-  Paper
+  Paper,
+  SvgIcon,
+  Divider
 } from "@material-ui/core";
+
+import { ReactComponent as LogoHashrate } from "./../img/hashrate.svg";
+import { ReactComponent as LogoMiners } from "./../img/miners.svg";
+import { ReactComponent as LogoMoney } from "./../img/money.svg";
 
 // Import CSS
 import style from "./css.js";
@@ -32,15 +38,51 @@ class Dashboard extends Component {
     const { classes } = this.props;
     return (
       <div className={classes.dashboard}>
-        <Grid container spacing={24} className={classes.dashboardItem}>
-          <Grid item xs={4}>
-            <Paper className={classes.dashboardItemElem}>Total Hashrate</Paper>
+        <Grid container spacing={24}>
+          <Grid item sm={4} xs={12}>
+            <Paper className={classes.dashboardItem}>
+              <Grid
+                justify="space-between"
+                container
+                className={classes.dashboardItemHeader}
+              >
+                <Typography className={classes.dashboardItemTitle} variant="h5">
+                  Hashrate
+                </Typography>
+                <LogoHashrate className={classes.dashboardItemLogo} />
+              </Grid>
+              <Divider className={classes.divider} />
+            </Paper>
           </Grid>
-          <Grid item xs={4}>
-            <Paper className={classes.dashboardItemElem}>Active Workers</Paper>
+          <Grid item sm={4} xs={12}>
+            <Paper className={classes.dashboardItem}>
+              <Grid
+                justify="space-between"
+                container
+                className={classes.dashboardItemHeader}
+              >
+                <Typography className={classes.dashboardItemTitle} variant="h5">
+                  Miners
+                </Typography>
+                <LogoMiners className={classes.dashboardItemLogo} />
+              </Grid>
+              <Divider className={classes.divider} />
+            </Paper>
           </Grid>
-          <Grid item xs={4}>
-            <Paper className={classes.dashboardItemElem}>Shares</Paper>
+          <Grid item sm={4} xs={12}>
+            <Paper className={classes.dashboardItem}>
+              <Grid
+                justify="space-between"
+                container
+                className={classes.dashboardItemHeader}
+              >
+                <Typography className={classes.dashboardItemTitle} variant="h5">
+                  Money
+                </Typography>
+                <LogoMoney className={classes.dashboardItemLogo} />
+              </Grid>
+              <Divider className={classes.divider} />
+            </Paper>
           </Grid>
         </Grid>
       </div>
