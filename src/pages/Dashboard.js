@@ -35,9 +35,15 @@ import DashboardCard from "./../components/dashboardCard";
 import style from "./css.js";
 
 class Dashboard extends Component {
+  componentDidMount() {
+    this.props.fetchDataDashboard();
+  }
   state = {};
   render() {
     const { classes } = this.props;
+    if (this.props.isPending) {
+      return <div>hello it's me 2.0</div>;
+    }
     return (
       <div className={classes.dashboard}>
         <Grid container spacing={24}>
@@ -68,9 +74,15 @@ class Dashboard extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  isPending: state.dashboard.isPending,
+  data: state.dashboard.data,
+  error: state.dashboard.error
+});
 
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => ({
+  fetchDataDashboard: () => dispatch(ACTIONS.fetchDataDashboard())
+});
 
 export default connect(
   mapStateToProps,

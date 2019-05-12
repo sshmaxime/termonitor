@@ -9,7 +9,7 @@ export default function configureStore(initialState) {
   const store = createStore(
     reducer,
     initialState,
-    applyMiddleware(logger, thunk)
+    applyMiddleware(thunk, logger)
   );
   return store;
 }
