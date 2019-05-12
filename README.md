@@ -1,4 +1,10 @@
 <p align="center">
+    <img src="./src/img/termonitor.svg"
+        height="200">
+    <h1 align="center">TERMONITOR</h1>
+</p>
+
+<p align="center">
 <a href="https://opensource.org/licenses/MIT" alt="License">
   <img src="https://img.shields.io/badge/License-MIT-yellow.svg" /></a>
 <a href="https://travis-ci.org/MaximeAubanel/termonitor" alt="Build">
