@@ -40,32 +40,35 @@ class Dashboard extends Component {
     this.props.fetchDataDashboard();
   }
   render() {
+    const dashboardStore = this.props.store;
     const { classes } = this.props;
-    if (this.props.store.isPending) {
+    if (dashboardStore.UI.isPending) {
       return <div>loasssding</div>;
     }
-    // TODO console.log(this.props.store.data.currentStatistics.time);
+    console.log(dashboardStore.data.currentHashrate / 1000000);
+    console.log(dashboardStore.data.activeWorkers);
+    console.log(dashboardStore.data.unpaid / 1000000000000000000);
     return (
       <div className={classes.dashboard}>
         <Grid container spacing={24}>
           <DashboardCard
             logo={LogoHashrate}
             title={"Hashrate"}
-            content={"1"}
+            content={dashboardStore.data.generalStats.currentHashrate}
             xs={12}
             sm={4}
           />
           <DashboardCard
             logo={LogoMiners}
             title={"Miners"}
-            content={"1000"}
+            content={dashboardStore.data.generalStats.activeWorkers}
             xs={12}
             sm={4}
           />
           <DashboardCard
             logo={LogoBalance}
             title={"Balance"}
-            content={"1000"}
+            content={dashboardStore.data.generalStats.unpaid}
             xs={12}
             sm={4}
           />

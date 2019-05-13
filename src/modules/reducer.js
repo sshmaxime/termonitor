@@ -6,9 +6,23 @@ const initialState = {
   ethermineAddr: "***REMOVED***",
   route: "/dashboard",
   dashboard: {
-    isPending: false,
-    data: "",
-    error: ""
+    UI: {
+      isPending: false
+    },
+    data: {
+      generalStats: {
+        time: null,
+        lastSeen: null,
+        reportedHashrate: null,
+        currentHashrate: null,
+        validShares: null,
+        invalidShares: null,
+        staleShares: null,
+        activeWorkers: null,
+        unpaid: null
+      },
+      error: null
+    }
   }
 };
 
@@ -27,19 +41,39 @@ const globalReducer = (state = initialState, action) => {
     }
     //
     case ACTIONS.Types.FETCH_DATA_DASHBOARD_PENDING: {
-      newState.dashboard.isPending = true;
+      const store = newState.dashboard;
+      store.UI.isPending = true;
       return newState;
     }
     case ACTIONS.Types.FETCH_DATA_DASHBOARD_FULFILLED: {
-      let data = action.payload;
-      newState.dashboard.isPending = false;
-      newState.dashboard.data = data;
+      const store = newState.dashboard;
+      let newGeneralStats = action.payload.currentStatistics;
+
+      store.data.generalStats.time = newGeneralStats.time;
+      store.data.generalStats.lastSeen = newGeneralStats.lastSeen;
+      store.data.generalStats.reportedHashrate = (
+        newGeneralStats.reportedHashrate / 1000000
+      ).toFixed(4);
+      store.data.generalStats.currentHashrate = (
+        newGeneralStats.currentHashrate / 1000000
+      ).toFixed(4);
+      store.data.generalStats.validShares = newGeneralStats.validShares;
+      store.data.generalStats.invalidShares = newGeneralStats.invalidShares;
+      store.data.generalStats.staleShares = newGeneralStats.staleShares;
+      store.data.generalStats.activeWorkers = newGeneralStats.activeWorkers;
+      store.data.generalStats.unpaid = (
+        newGeneralStats.unpaid / 1000000000000000000
+      ).toFixed(5);
+
+      store.UI.isPending = false;
       return newState;
     }
     case ACTIONS.Types.FETCH_DATA_DASHBOARD_REJECTED: {
+      const store = newState.dashboard;
       let error = action.payload;
-      newState.dashboard.isPending = false;
-      newState.dashboard.error = error;
+
+      store.dashboard.error = error;
+      store.UI.isPending = false;
       return newState;
     }
     default:
