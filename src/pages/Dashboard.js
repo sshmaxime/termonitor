@@ -35,22 +35,23 @@ import DashboardCard from "./../components/dashboardCard";
 import style from "./css.js";
 
 class Dashboard extends Component {
+  state = {};
   componentDidMount() {
     this.props.fetchDataDashboard();
   }
-  state = {};
   render() {
     const { classes } = this.props;
-    if (this.props.isPending) {
-      return <div>hello it's me 2.0</div>;
+    if (this.props.store.isPending) {
+      return <div>loasssding</div>;
     }
+    // TODO console.log(this.props.store.data.currentStatistics.time);
     return (
       <div className={classes.dashboard}>
         <Grid container spacing={24}>
           <DashboardCard
             logo={LogoHashrate}
             title={"Hashrate"}
-            content={"1000"}
+            content={"1"}
             xs={12}
             sm={4}
           />
@@ -75,9 +76,7 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = state => ({
-  isPending: state.dashboard.isPending,
-  data: state.dashboard.data,
-  error: state.dashboard.error
+  store: state.dashboard
 });
 
 const mapDispatchToProps = dispatch => ({

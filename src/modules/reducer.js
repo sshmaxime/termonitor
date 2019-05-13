@@ -3,7 +3,7 @@ import _ from "lodash";
 
 const initialState = {
   username: "",
-  ethermineAddr: "",
+  ethermineAddr: "***REMOVED***",
   route: "/dashboard",
   dashboard: {
     isPending: false,

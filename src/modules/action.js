@@ -1,6 +1,6 @@
 import Axios from "axios";
 
-const apiUrl = "https://reqres.in/api/users/2?delay=3";
+const apiEndpoint = "https://api.ethermine.org/";
 
 // Types of action
 const Types = {
@@ -23,17 +23,21 @@ const updateRoute = route => ({
   payload: route
 });
 
-const fetchDataDashboard = () => dispatch => {
+const fetchDataDashboard = () => (dispatch, getState) => {
+  const url = apiEndpoint + "miner/" + getState().ethermineAddr + "/dashboard/";
   dispatch({ type: Types.FETCH_DATA_DASHBOARD_PENDING });
 
-  return Axios.get(apiUrl)
+  return Axios.get(url)
     .then(data => {
-      dispatch({ type: Types.FETCH_DATA_DASHBOARD_FULFILLED, data });
+      dispatch({
+        type: Types.FETCH_DATA_DASHBOARD_FULFILLED,
+        payload: data.data.data
+      });
     })
     .catch(error => {
       dispatch({
         type: Types.FETCH_DATA_DASHBOARD_REJECTED,
-        error: error.message || "Unexpected Error!!!"
+        payload: error.message || "Unexpected Error!!!"
       });
     });
 };
