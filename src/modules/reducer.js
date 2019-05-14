@@ -2,15 +2,17 @@ import ACTIONS from "./action";
 import _ from "lodash";
 
 const initialState = {
-  username: "",
-  ethermineAddr: "***REMOVED***",
   route: "/dashboard",
+  userData: {
+    username: "",
+    ethermineAddr: "***REMOVED***"
+  },
   dashboard: {
     UI: {
-      isPending: false
+      isLoading: false
     },
     data: {
-      generalStats: {
+      currentStatistics: {
         time: null,
         lastSeen: null,
         reportedHashrate: null,
@@ -21,8 +23,10 @@ const initialState = {
         activeWorkers: null,
         unpaid: null
       },
-      error: null
-    }
+      statistics: null,
+      minPayout: null
+    },
+    error: null
   }
 };
 
@@ -39,46 +43,62 @@ const globalReducer = (state = initialState, action) => {
       newState.route = newRoute;
       return newState;
     }
-    //
-    case ACTIONS.Types.FETCH_DATA_DASHBOARD_PENDING: {
-      const store = newState.dashboard;
-      store.UI.isPending = true;
-      return newState;
-    }
-    case ACTIONS.Types.FETCH_DATA_DASHBOARD_FULFILLED: {
-      const store = newState.dashboard;
-      let newGeneralStats = action.payload.currentStatistics;
 
-      store.data.generalStats.time = newGeneralStats.time;
-      store.data.generalStats.lastSeen = newGeneralStats.lastSeen;
-      store.data.generalStats.reportedHashrate = (
-        newGeneralStats.reportedHashrate / 1000000
-      ).toFixed(4);
-      store.data.generalStats.currentHashrate = (
-        newGeneralStats.currentHashrate / 1000000
-      ).toFixed(4);
-      store.data.generalStats.validShares = newGeneralStats.validShares;
-      store.data.generalStats.invalidShares = newGeneralStats.invalidShares;
-      store.data.generalStats.staleShares = newGeneralStats.staleShares;
-      store.data.generalStats.activeWorkers = newGeneralStats.activeWorkers;
-      store.data.generalStats.unpaid = (
-        newGeneralStats.unpaid / 1000000000000000000
-      ).toFixed(5);
+    ///////////////////////////////
+    ////////// DASHBOARD //////////
+    ///////////////////////////////
+    case ACTIONS.Types.FETCH_DATA_DASHBOARD: {
+      const subType = action.subType;
+      const payload = action.payload;
+      let store = newState.dashboard;
 
-      store.UI.isPending = false;
-      return newState;
-    }
-    case ACTIONS.Types.FETCH_DATA_DASHBOARD_REJECTED: {
-      const store = newState.dashboard;
-      let error = action.payload;
+      if (subType === ACTIONS.Types.FETCH_DATA_DASHBOARD_PENDING)
+        store = dashboardFetchPending(store, payload);
+      else if (subType === ACTIONS.Types.FETCH_DATA_DASHBOARD_FULFILLED)
+        store = dashboardFetchFulfilled(store, payload);
+      else if (subType === ACTIONS.Types.FETCH_DATA_DASHBOARD_REJECTED)
+        store = dashboardFetchRejected(store, payload);
 
-      store.dashboard.error = error;
-      store.UI.isPending = false;
+      newState.dashboard = store;
       return newState;
     }
     default:
       return newState;
   }
+};
+
+///////////////////////////////
+////////// DASHBOARD //////////
+///////////////////////////////
+const dashboardFetchPending = (store, _) => {
+  store.UI.isLoading = true;
+  return store;
+};
+const dashboardFetchFulfilled = (store, payload) => {
+  let currentStatistics = payload.currentStatistics;
+
+  store.data.currentStatistics.time = currentStatistics.time;
+  store.data.currentStatistics.lastSeen = currentStatistics.lastSeen;
+  store.data.currentStatistics.reportedHashrate = (
+    currentStatistics.reportedHashrate / 1000000
+  ).toFixed(1);
+  store.data.currentStatistics.currentHashrate = (
+    currentStatistics.currentHashrate / 1000000
+  ).toFixed(1);
+  store.data.currentStatistics.validShares = currentStatistics.validShares;
+  store.data.currentStatistics.invalidShares = currentStatistics.invalidShares;
+  store.data.currentStatistics.staleShares = currentStatistics.staleShares;
+  store.data.currentStatistics.activeWorkers = currentStatistics.activeWorkers;
+  store.data.currentStatistics.unpaid = (currentStatistics.unpaid / 1000000000000000000).toFixed(5);
+
+  store.UI.isLoading = false;
+  return store;
+};
+const dashboardFetchRejected = (store, payload) => {
+  store.error = payload;
+
+  store.UI.isLoading = false;
+  return store;
 };
 
 export default globalReducer;
