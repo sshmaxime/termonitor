@@ -50,22 +50,22 @@ class Dashboard extends Component {
         <Grid container spacing={24}>
           <DashboardCard
             logo={LogoHashrate}
-            title={"Hashrate"}
+            title={"Current Hashrate"}
             content={dashboardStore.data.currentStatistics.currentHashrate}
             xs={12}
             sm={4}
           />
           <DashboardCard
-            logo={LogoMiners}
-            title={"Miners"}
-            content={dashboardStore.data.currentStatistics.activeWorkers}
+            logo={LogoBalance}
+            title={"Unpaid Balance"}
+            content={dashboardStore.data.currentStatistics.unpaid}
             xs={12}
             sm={4}
           />
           <DashboardCard
-            logo={LogoBalance}
-            title={"Balance"}
-            content={dashboardStore.data.currentStatistics.unpaid}
+            logo={LogoMiners}
+            title={"Active Miners"}
+            content={dashboardStore.data.currentStatistics.activeWorkers}
             xs={12}
             sm={4}
           />

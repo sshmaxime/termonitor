@@ -79,17 +79,16 @@ const dashboardFetchFulfilled = (store, payload) => {
 
   store.data.currentStatistics.time = new Date(currentStatistics.time * 1000);
   store.data.currentStatistics.lastSeen = new Date(currentStatistics.lastSeen * 1000);
-  store.data.currentStatistics.reportedHashrate = (
-    currentStatistics.reportedHashrate / 1000000
-  ).toFixed(1);
-  store.data.currentStatistics.currentHashrate = (
-    currentStatistics.currentHashrate / 1000000
-  ).toFixed(1);
+  store.data.currentStatistics.reportedHashrate =
+    (currentStatistics.reportedHashrate / 1000000).toFixed(1) + " MH/s";
+  store.data.currentStatistics.currentHashrate =
+    (currentStatistics.currentHashrate / 1000000).toFixed(1) + " MH/s";
   store.data.currentStatistics.validShares = currentStatistics.validShares;
   store.data.currentStatistics.invalidShares = currentStatistics.invalidShares;
   store.data.currentStatistics.staleShares = currentStatistics.staleShares;
   store.data.currentStatistics.activeWorkers = currentStatistics.activeWorkers;
-  store.data.currentStatistics.unpaid = (currentStatistics.unpaid / 1000000000000000000).toFixed(5);
+  store.data.currentStatistics.unpaid =
+    (currentStatistics.unpaid / 1000000000000000000).toFixed(5) + " ETH";
 
   store.UI.isLoading = false;
   return store;

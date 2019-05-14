@@ -23,7 +23,7 @@ const style = theme => ({
   },
   cardContentTitle: {
     textAlign: "center",
-    fontWeight: "500",
+    fontWeight: "400",
     color: "white"
   },
   divider: {
