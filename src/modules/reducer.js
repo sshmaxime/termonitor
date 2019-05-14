@@ -90,6 +90,8 @@ const dashboardFetchFulfilled = (store, payload) => {
   store.data.currentStatistics.unpaid =
     (currentStatistics.unpaid / 1000000000000000000).toFixed(5) + " ETH";
 
+  // transform data to isostring for statistics
+  // console.log(store.data.currentStatistics.time.toISOString());
   store.UI.isLoading = false;
   return store;
 };

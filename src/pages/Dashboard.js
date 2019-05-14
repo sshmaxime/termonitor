@@ -29,7 +29,8 @@ import { ReactComponent as LogoHashrate } from "./../img/hashrate.svg";
 import { ReactComponent as LogoMiners } from "./../img/miners.svg";
 import { ReactComponent as LogoBalance } from "./../img/money.svg";
 
-import DashboardCard from "./../components/dashboardCard";
+import DashboardCard from "../components/dashboardCard";
+import DashboardGraph from "../components/dashboardGraph";
 
 // Import CSS
 import style from "./css.js";
@@ -69,6 +70,7 @@ class Dashboard extends Component {
             xs={12}
             sm={4}
           />
+          <DashboardGraph data={dashboardStore.statistics} title={"Statistics"} xs={12} />
         </Grid>
       </div>
     );
