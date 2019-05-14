@@ -77,8 +77,8 @@ const dashboardFetchPending = (store, _) => {
 const dashboardFetchFulfilled = (store, payload) => {
   let currentStatistics = payload.currentStatistics;
 
-  store.data.currentStatistics.time = currentStatistics.time;
-  store.data.currentStatistics.lastSeen = currentStatistics.lastSeen;
+  store.data.currentStatistics.time = new Date(currentStatistics.time * 1000);
+  store.data.currentStatistics.lastSeen = new Date(currentStatistics.lastSeen * 1000);
   store.data.currentStatistics.reportedHashrate = (
     currentStatistics.reportedHashrate / 1000000
   ).toFixed(1);
