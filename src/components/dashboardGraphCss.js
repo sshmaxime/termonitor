@@ -57,23 +57,27 @@ const chartStyle = {
     stroke: {
       curve: "smooth"
     },
-    xaxis: {
-      type: "datetime",
-      // Insert date here
-      categories: [
-        "2019-05-14T18:00:00.000Z",
-        "2019-05-14T18:10:00.000Z",
-        "2019-05-14T18:20:00.000Z",
-        "2019-05-14T18:30:00.000Z",
-        "2019-05-14T18:40:00.000Z",
-        "2019-05-14T18:50:00.000Z",
-        "2019-05-14T19:00:00.000Z"
-      ]
-    },
     // Insert Max & Min here
     yaxis: {
-      max: 500,
-      min: 0
+      max: 0,
+      min: 0,
+      labels: {
+        style: {
+          color: "#ffffff",
+          fontSize: "13"
+        }
+      }
+    },
+    xaxis: {
+      type: "datetime",
+      labels: {
+        style: {
+          colors: "#ffffff",
+          fontSize: "15"
+        }
+      },
+      // Insert date here
+      categories: ["0000-00-00T00:00:00.000Z"]
     },
     tooltip: {
       x: {
@@ -81,14 +85,11 @@ const chartStyle = {
       }
     }
   },
+  // Insert data here
   series: [
     {
-      name: "series1",
-      data: [300.5, 300, 300, 300, 300, 300, 300]
-    },
-    {
-      name: "series2",
-      data: [280, 320, 280, 320, 280, 320, 280]
+      name: "exemple",
+      data: [100]
     }
   ]
 };

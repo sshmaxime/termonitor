@@ -9,7 +9,7 @@ const initialState = {
   },
   dashboard: {
     UI: {
-      isLoading: false
+      isLoading: true
     },
     data: {
       currentStatistics: {
@@ -76,9 +76,10 @@ const dashboardFetchPending = (store, _) => {
 };
 const dashboardFetchFulfilled = (store, payload) => {
   let currentStatistics = payload.currentStatistics;
+  let statistics = payload.statistics;
 
-  store.data.currentStatistics.time = new Date(currentStatistics.time * 1000);
-  store.data.currentStatistics.lastSeen = new Date(currentStatistics.lastSeen * 1000);
+  store.data.currentStatistics.time = new Date(currentStatistics.time * 1000).toISOString();
+  store.data.currentStatistics.lastSeen = new Date(currentStatistics.lastSeen * 1000).toISOString();
   store.data.currentStatistics.reportedHashrate =
     (currentStatistics.reportedHashrate / 1000000).toFixed(1) + " MH/s";
   store.data.currentStatistics.currentHashrate =
@@ -92,6 +93,7 @@ const dashboardFetchFulfilled = (store, payload) => {
 
   // transform data to isostring for statistics
   // console.log(store.data.currentStatistics.time.toISOString());
+  store.data.statistics = parseStatistics(statistics);
   store.UI.isLoading = false;
   return store;
 };
@@ -100,6 +102,21 @@ const dashboardFetchRejected = (store, payload) => {
 
   store.UI.isLoading = false;
   return store;
+};
+
+///////////////////////////////////
+////////// PARSING TOOLS //////////
+///////////////////////////////////
+
+const parseStatistics = statistics => {
+  let newStatistics = [];
+  statistics.forEach(function(statistic) {
+    statistic.reportedHashrate = (statistic.reportedHashrate / 1000000).toFixed(1);
+    statistic.currentHashrate = (statistic.currentHashrate / 1000000).toFixed(1);
+    statistic.time = new Date(statistic.time * 1000).toISOString();
+    newStatistics.push(statistic);
+  });
+  return newStatistics;
 };
 
 export default globalReducer;

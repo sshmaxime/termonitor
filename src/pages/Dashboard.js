@@ -70,7 +70,7 @@ class Dashboard extends Component {
             xs={12}
             sm={4}
           />
-          <DashboardGraph data={dashboardStore.statistics} title={"Statistics"} xs={12} />
+          <DashboardGraph data={dashboardStore.data.statistics} title={"Statistics"} xs={12} />
         </Grid>
       </div>
     );
