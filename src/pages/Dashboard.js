@@ -38,14 +38,15 @@ import style from "./css.js";
 class Dashboard extends Component {
   componentDidMount() {
     this.props.fetchDataDashboard();
+    this.interval = setInterval(() => this.props.fetchDataDashboard(), 210000); // Update every 3 minutes
+  }
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
   render() {
     const { classes } = this.props;
     const dashboardStore = this.props.store;
 
-    if (dashboardStore.UI.isLoading) {
-      return <div>loasssding</div>;
-    }
     return (
       <div className={classes.dashboard}>
         <Grid container spacing={24}>
@@ -70,7 +71,7 @@ class Dashboard extends Component {
             xs={12}
             sm={4}
           />
-          <DashboardGraph data={dashboardStore.data.statistics} title={"Statistics"} xs={12} />
+          <DashboardGraph data={dashboardStore} title={"Statistics"} xs={12} />
         </Grid>
       </div>
     );

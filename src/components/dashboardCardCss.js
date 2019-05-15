@@ -28,6 +28,10 @@ const style = theme => ({
   },
   divider: {
     height: "0.15em"
+  },
+  progress: {
+    color: "#43476A",
+    transition: "opacity 0.5s"
   }
 });
 

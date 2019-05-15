@@ -14,9 +14,14 @@ class DashboardGraph extends Component {
     const currentHashrateArray = [];
     let min = 10000000000000;
     let max = 0;
+    const statistics = this.props.data.data.statistics;
 
-    console.log(this.props.data);
-    this.props.data.forEach(statistic => {
+    if (this.props.data.UI.isLoading) {
+      return <div>loasssding</div>;
+    }
+
+    console.log(statistics);
+    statistics.forEach(statistic => {
       let r = parseFloat(statistic.reportedHashrate);
       if (r > max) max = r;
       if (r < min) min = r;
@@ -51,12 +56,16 @@ class DashboardGraph extends Component {
             </Typography>
           </Grid>
           <Divider className={classes.divider} />
-          <ReactApexChart
-            options={chartStyle.options}
-            series={chartStyle.series}
-            type="area"
-            height="300"
-          />
+          {this.props.content ? (
+            this.props.content
+          ) : (
+            <ReactApexChart
+              options={chartStyle.options}
+              series={chartStyle.series}
+              type="area"
+              height="300"
+            />
+          )}
         </Paper>
       </Grid>
     );

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 // Import Material UI
 import { Typography, withStyles, Grid, Paper, Divider } from "@material-ui/core";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 import style from "./dashboardCardCss";
 
@@ -20,7 +21,11 @@ class DashboardCard extends Component {
           <Divider className={classes.divider} />
           <Grid className={classes.cardContentContainer}>
             <Typography className={classes.cardContentTitle} variant="h5">
-              {this.props.content}
+              {this.props.content ? (
+                this.props.content
+              ) : (
+                <CircularProgress className={classes.progress} />
+              )}
             </Typography>
           </Grid>
         </Paper>
