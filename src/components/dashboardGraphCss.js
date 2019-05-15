@@ -29,6 +29,16 @@ const style = theme => ({
   },
   divider: {
     height: "0.1em"
+  },
+  progress: {
+    color: "#43476A",
+    margin: 0,
+    position: "absolute",
+    top: "50%"
+  },
+  progressDiv: {
+    height: 300, // match with chart's height
+    textAlign: "center"
   }
 });
 

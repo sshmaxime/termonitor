@@ -5,6 +5,7 @@ import { Typography, withStyles, Grid, Paper, Divider } from "@material-ui/core"
 
 import { chartStyle, style } from "./dashboardGraphCss";
 import ReactApexChart from "react-apexcharts";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 class DashboardGraph extends Component {
   render() {
@@ -16,36 +17,32 @@ class DashboardGraph extends Component {
     let max = 0;
     const statistics = this.props.data.data.statistics;
 
-    if (!this.props.data.data.statistics) {
-      return <div>loasssding</div>;
+    if (this.props.data.data.statistics) {
+      statistics.forEach(statistic => {
+        let r = parseFloat(statistic.reportedHashrate);
+        if (r > max) max = r;
+        if (r < min) min = r;
+        let c = parseFloat(statistic.currentHashrate);
+        if (c > max) max = c;
+        if (c < min) min = c;
+        timeArray.push(statistic.time);
+        reportedHashrateArray.push(statistic.reportedHashrate);
+        currentHashrateArray.push(statistic.currentHashrate);
+      });
+      chartStyle.options.xaxis.categories = timeArray;
+      chartStyle.options.yaxis.max = max + 50;
+      chartStyle.options.yaxis.min = min - 50;
+      chartStyle.series = [
+        {
+          name: "Reported Hashrate",
+          data: reportedHashrateArray
+        },
+        {
+          name: "Current Hashrate",
+          data: currentHashrateArray
+        }
+      ];
     }
-
-    console.log(statistics);
-    statistics.forEach(statistic => {
-      let r = parseFloat(statistic.reportedHashrate);
-      if (r > max) max = r;
-      if (r < min) min = r;
-      let c = parseFloat(statistic.currentHashrate);
-      if (c > max) max = c;
-      if (c < min) min = c;
-      timeArray.push(statistic.time);
-      reportedHashrateArray.push(statistic.reportedHashrate);
-      currentHashrateArray.push(statistic.currentHashrate);
-    });
-    console.log(max + "--" + min);
-    chartStyle.options.xaxis.categories = timeArray;
-    chartStyle.options.yaxis.max = max + 50;
-    chartStyle.options.yaxis.min = min - 50;
-    chartStyle.series = [
-      {
-        name: "Reported Hashrate",
-        data: reportedHashrateArray
-      },
-      {
-        name: "Current Hashrate",
-        data: currentHashrateArray
-      }
-    ];
 
     return (
       <Grid item xs={this.props.xs}>
@@ -56,15 +53,17 @@ class DashboardGraph extends Component {
             </Typography>
           </Grid>
           <Divider className={classes.divider} />
-          {this.props.content ? (
-            this.props.content
-          ) : (
+          {this.props.data.data.statistics ? (
             <ReactApexChart
               options={chartStyle.options}
               series={chartStyle.series}
               type="area"
               height="300"
             />
+          ) : (
+            <div className={classes.progressDiv}>
+              <CircularProgress className={classes.progress} />
+            </div>
           )}
         </Paper>
       </Grid>
