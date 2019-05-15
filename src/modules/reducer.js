@@ -5,7 +5,7 @@ const initialState = {
   route: "/",
   userData: {
     username: "",
-    ethermineAddr: "***REMOVED***"
+    ethAddr: "***REMOVED***"
   },
   dashboard: {
     UI: {

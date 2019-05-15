@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import SettingsIcon from "@material-ui/icons/Settings";
 import IconButton from "@material-ui/core/IconButton";
 import { ReactComponent as LogoTermonitor } from "./../img/termonitorW.svg";
 
@@ -29,6 +29,17 @@ const style = theme => ({
     "&:hover": {
       backgroundColor: "#1e1e2f"
     }
+  },
+  grow: {
+    flexGrow: 1
+  },
+  addr: {
+    color: "grey",
+    fontSize: "10px",
+    paddingRight: 20
+  },
+  settingsIcon: {
+    color: "white"
   }
 });
 
@@ -48,9 +59,17 @@ class NavBar extends Component {
             >
               <LogoTermonitor className={classes.logo} />
             </IconButton>
-            <Typography variant="h6" color="inherit">
+            <Typography variant="h6" color="inherit" className={classes.grow}>
               TERMONITOR
             </Typography>
+            {this.props.ethAddr ? (
+              <React.Fragment>
+                <Typography className={classes.addr}>{this.props.ethAddr}</Typography>
+                <IconButton aria-label="Delete" className={classes.margin}>
+                  <SettingsIcon fontSize="large" className={classes.settingsIcon} />
+                </IconButton>
+              </React.Fragment>
+            ) : null}
           </Toolbar>
         </AppBar>
       </div>

@@ -26,7 +26,7 @@ const updateRoute = route => ({
 const fetchDataDashboard = () => (dispatch, getState) => {
   dispatch({ type: Types.FETCH_DATA_DASHBOARD, subType: Types.FETCH_DATA_DASHBOARD_PENDING });
 
-  const url = apiEndpoint + "miner/" + getState().userData.ethermineAddr + "/dashboard/";
+  const url = apiEndpoint + "miner/" + getState().userData.ethAddr + "/dashboard/";
 
   return Axios.get(url)
     .then(data => {

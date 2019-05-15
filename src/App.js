@@ -33,7 +33,7 @@ class App extends Component {
     const { classes } = this.props;
     return (
       <div>
-        <NavBar handleButton={this.handleHomeSubmit} />
+        <NavBar handleButton={this.handleHomeSubmit} ethAddr={this.props.userData.ethAddr} />
         <div className={classes.app}>
           {this.props.route === Routes.HOME ? <Home /> : null}
           {this.props.route === Routes.DASHBOARD ? <Dashboard /> : null}
@@ -44,7 +44,8 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  route: state.route
+  route: state.route,
+  userData: state.userData
 });
 
 const mapDispatchToProps = dispatch => ({
