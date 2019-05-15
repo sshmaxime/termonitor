@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="./src/img/termonitor.svg"
+    <img src="./src/img/termonitorB.svg"
         height="200">
     <h1 align="center">TERMONITOR</h1>
 </p>

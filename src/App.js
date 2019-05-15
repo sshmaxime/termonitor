@@ -8,6 +8,7 @@ import { withStyles } from "@material-ui/core";
 // Import our components
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
+import NavBar from "./components/navbar";
 
 // Import Routes
 import Routes from "./route";
@@ -18,7 +19,8 @@ const style = theme => ({
     position: "absolute",
     height: "100%",
     width: "100%",
-    padding: theme.spacing.unit * 2
+    padding: theme.spacing.unit * 2,
+    paddingTop: theme.spacing.unit * 7.5
   }
 });
 
@@ -26,9 +28,12 @@ class App extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <div className={classes.app}>
-        {this.props.route === Routes.HOME ? <Home /> : null}
-        {this.props.route === Routes.DASHBOARD ? <Dashboard /> : null}
+      <div>
+        <NavBar />
+        <div className={classes.app}>
+          {this.props.route === Routes.HOME ? <Home /> : null}
+          {this.props.route === Routes.DASHBOARD ? <Dashboard /> : null}
+        </div>
       </div>
     );
   }
