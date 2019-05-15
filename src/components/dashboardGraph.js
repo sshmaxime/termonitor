@@ -16,7 +16,7 @@ class DashboardGraph extends Component {
     let max = 0;
     const statistics = this.props.data.data.statistics;
 
-    if (this.props.data.UI.isLoading) {
+    if (!this.props.data.data.statistics) {
       return <div>loasssding</div>;
     }
 
