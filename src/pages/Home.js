@@ -54,11 +54,7 @@ class Home extends Component {
           </Typography>
           <FormControl margin="normal" fullWidth>
             <InputLabel>Username</InputLabel>
-            <Input
-              name="username"
-              autoComplete="username"
-              onChange={this.handleChange}
-            />
+            <Input name="username" autoComplete="username" onChange={this.handleChange} />
           </FormControl>
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}

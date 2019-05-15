@@ -1,6 +1,7 @@
 // Import React components
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import ACTIONS from "./modules/action";
 
 // Import Material UI
 import { withStyles } from "@material-ui/core";
@@ -25,11 +26,14 @@ const style = theme => ({
 });
 
 class App extends Component {
+  handleHomeSubmit = event => {
+    this.props.updateRoute(Routes.DASHBOARD);
+  };
   render() {
     const { classes } = this.props;
     return (
       <div>
-        <NavBar />
+        <NavBar handleButton={this.handleHomeSubmit} />
         <div className={classes.app}>
           {this.props.route === Routes.HOME ? <Home /> : null}
           {this.props.route === Routes.DASHBOARD ? <Dashboard /> : null}
@@ -43,4 +47,11 @@ const mapStateToProps = state => ({
   route: state.route
 });
 
-export default connect(mapStateToProps)(withStyles(style)(App));
+const mapDispatchToProps = dispatch => ({
+  updateRoute: route => dispatch(ACTIONS.updateRoute(route))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(style)(App));

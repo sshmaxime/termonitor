@@ -2,7 +2,7 @@ import ACTIONS from "./action";
 import _ from "lodash";
 
 const initialState = {
-  route: "/dashboard",
+  route: "/",
   userData: {
     username: "",
     ethermineAddr: "***REMOVED***"
