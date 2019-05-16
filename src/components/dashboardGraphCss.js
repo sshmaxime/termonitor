@@ -83,7 +83,7 @@ const chartStyle = {
       labels: {
         style: {
           colors: "#ffffff",
-          fontSize: "15"
+          fontSize: "12"
         }
       },
       // Insert date here

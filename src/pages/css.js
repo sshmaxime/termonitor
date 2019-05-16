@@ -9,7 +9,7 @@ const style = theme => ({
   avatar: {
     margin: "0 auto",
     marginBottom: theme.spacing.unit,
-    backgroundColor: theme.palette.secondary.main
+    backgroundColor: "#1e1e2f"
   },
   dashboard: {
     borderRadius: "10px",

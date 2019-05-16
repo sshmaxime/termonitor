@@ -5,7 +5,7 @@ const apiWalletEndpoint =
   "https://api.etherscan.io/api?module=account&action=balance&tag=latest&address=";
 // Types of action
 const Types = {
-  UPDATE_USERNAME: "UPDATE_USERNAME",
+  UPDATE_ADDR: "UPDATE_USERNAME",
   UPDATE_ROUTE: "UPDATE_ROUTE",
 
   // DASHBOARD
@@ -16,9 +16,9 @@ const Types = {
 };
 
 // Actions
-const updateUsername = username => ({
-  type: Types.UPDATE_USERNAME,
-  payload: username
+const updateAddr = addr => ({
+  type: Types.UPDATE_ADDR,
+  payload: addr
 });
 const updateRoute = route => ({
   type: Types.UPDATE_ROUTE,
@@ -53,7 +53,7 @@ const fetchDataDashboard = () => (dispatch, getState) => {
 };
 
 export default {
-  updateUsername,
+  updateAddr,
   updateRoute,
   fetchDataDashboard,
   Types

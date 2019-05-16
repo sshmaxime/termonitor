@@ -27,12 +27,10 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import style from "./css.js";
 
 class Home extends Component {
-  state = { username: "" };
+  state = { addr: "" };
   handleSubmit = event => {
-    if (this.state.username !== "") {
-      this.props.updateUsername(this.state.username);
-      this.props.updateRoute(Routes.DASHBOARD);
-    }
+    this.props.updateAddr(this.state.addr);
+    this.props.updateRoute(Routes.DASHBOARD);
     event.preventDefault();
   };
   handleChange = event => {
@@ -50,18 +48,18 @@ class Home extends Component {
             <LockOutlinedIcon />
           </Avatar>
           <Typography variant="h5" align="center">
-            Sign in
+            Hello World
           </Typography>
           <FormControl margin="normal" fullWidth>
-            <InputLabel>Username</InputLabel>
-            <Input name="username" autoComplete="username" onChange={this.handleChange} />
+            <InputLabel>Ethereum Public Address</InputLabel>
+            <Input name="addr" value={this.state.addr} onChange={this.handleChange} />
           </FormControl>
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
           <Button type="submit" fullWidth variant="contained" color="primary">
-            Sign in
+            Termonitor me
           </Button>
         </form>
       </Paper>
@@ -70,12 +68,12 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => ({
-  username: state.username,
+  addr: state.addr,
   route: state.route
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateUsername: username => dispatch(ACTIONS.updateUsername(username)),
+  updateAddr: username => dispatch(ACTIONS.updateAddr(username)),
   updateRoute: route => dispatch(ACTIONS.updateRoute(route))
 });
 

@@ -50,7 +50,7 @@ const style = theme => ({
   balance: {
     fontSize: "20px",
     color: "white",
-    paddingRight: 20
+    width: 140
   }
 });
 

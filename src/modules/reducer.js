@@ -4,8 +4,7 @@ import _ from "lodash";
 const initialState = {
   route: "/",
   userData: {
-    username: "",
-    ethAddr: "***REMOVED***"
+    ethAddr: "" //***REMOVED***
   },
   dashboard: {
     UI: {
@@ -34,9 +33,9 @@ const initialState = {
 const globalReducer = (state = initialState, action) => {
   let newState = _.cloneDeep(state);
   switch (action.type) {
-    case ACTIONS.Types.UPDATE_USERNAME: {
-      let newUsername = action.payload;
-      newState.username = newUsername;
+    case ACTIONS.Types.UPDATE_ADDR: {
+      let newAddr = action.payload;
+      newState.userData.ethAddr = newAddr;
       return newState;
     }
     case ACTIONS.Types.UPDATE_ROUTE: {
