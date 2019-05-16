@@ -95,7 +95,7 @@ const dashboardFulfilled = (store, payload) => {
 
   // WALLET //
   let payloadWallet = payload.dataWallet;
-  store.data.balance = (payloadWallet.result / 1000000000000000000).toFixed(5) + " ETH";
+  store.data.balance = (payloadWallet.result / 1000000000000000000).toFixed(2) + " ETH";
 
   store.UI.isLoading = false;
   return store;

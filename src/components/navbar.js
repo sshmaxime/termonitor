@@ -7,6 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import SettingsIcon from "@material-ui/icons/Settings";
 import IconButton from "@material-ui/core/IconButton";
 import { ReactComponent as LogoTermonitor } from "./../img/termonitorW.svg";
+import { ReactComponent as LogoCoin } from "./../img/coin.svg";
 
 const style = theme => ({
   root: {
@@ -36,10 +37,20 @@ const style = theme => ({
   addr: {
     color: "grey",
     fontSize: "10px",
-    paddingRight: 20
+    paddingRight: 10
   },
   settingsIcon: {
     color: "white"
+  },
+  coinIcon: {
+    width: 40,
+    height: 40,
+    paddingRight: 10
+  },
+  balance: {
+    fontSize: "20px",
+    color: "white",
+    paddingRight: 20
   }
 });
 
@@ -64,8 +75,10 @@ class NavBar extends Component {
             </Typography>
             {this.props.ethAddr ? (
               <React.Fragment>
+                <LogoCoin className={classes.coinIcon} />
+                <Typography className={classes.balance}>{this.props.balance}</Typography>
                 <Typography className={classes.addr}>{this.props.ethAddr}</Typography>
-                <IconButton aria-label="Delete" className={classes.margin}>
+                <IconButton className={classes.margin}>
                   <SettingsIcon fontSize="large" className={classes.settingsIcon} />
                 </IconButton>
               </React.Fragment>
