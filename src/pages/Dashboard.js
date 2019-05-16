@@ -4,6 +4,7 @@ import React, { Component } from "react";
 // Import Redux components
 import { connect } from "react-redux";
 import ACTIONS from "../modules/action";
+import Routes from "../route";
 
 // Import Material UI
 import {
@@ -31,6 +32,7 @@ import { ReactComponent as LogoBalance } from "./../img/money.svg";
 
 import DashboardCard from "../components/dashboardCard";
 import DashboardGraph from "../components/dashboardGraph";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 // Import CSS
 import style from "./css.js";
@@ -43,10 +45,24 @@ class Dashboard extends Component {
   componentWillUnmount() {
     clearInterval(this.interval);
   }
+  goToHome() {
+    this.props.updateRoute(Routes.HOME);
+  }
   render() {
     const { classes } = this.props;
     const dashboardStore = this.props.store;
 
+    if (this.props.store.UI.error !== null) {
+      this.goToHome();
+    }
+
+    if (!this.props.store.UI.isReady) {
+      return (
+        <div className={classes.progressDiv}>
+          <CircularProgress className={classes.progress} />
+        </div>
+      );
+    }
     return (
       <div className={classes.dashboard}>
         <Grid container spacing={24}>
@@ -83,7 +99,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchDataDashboard: () => dispatch(ACTIONS.fetchDataDashboard())
+  fetchDataDashboard: () => dispatch(ACTIONS.fetchDataDashboard()),
+  updateRoute: route => dispatch(ACTIONS.updateRoute(route))
 });
 
 export default connect(

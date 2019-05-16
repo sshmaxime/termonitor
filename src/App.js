@@ -42,6 +42,7 @@ class App extends Component {
           handleButton={this.handleHomeSubmit}
           ethAddr={this.props.userData.ethAddr}
           balance={this.props.data.balance}
+          isReady={this.props.isReady}
         />
         <div className={classes.app}>
           {this.props.route === Routes.HOME ? <Home /> : null}
@@ -55,7 +56,8 @@ class App extends Component {
 const mapStateToProps = state => ({
   route: state.route,
   userData: state.userData,
-  data: state.dashboard.data
+  data: state.dashboard.data,
+  isReady: state.dashboard.UI.isReady
 });
 
 const mapDispatchToProps = dispatch => ({

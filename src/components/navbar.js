@@ -73,7 +73,7 @@ class NavBar extends Component {
             <Typography variant="h6" color="inherit" className={classes.grow}>
               TERMONITOR
             </Typography>
-            {this.props.ethAddr ? (
+            {this.props.isReady ? (
               <React.Fragment>
                 <LogoCoin className={classes.coinIcon} />
                 <Typography className={classes.balance}>{this.props.balance}</Typography>

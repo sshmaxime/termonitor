@@ -18,6 +18,8 @@ import {
   Checkbox,
   withStyles,
   Button,
+  TextField,
+  FormHelperText,
   FormControl,
   Paper
 } from "@material-ui/core";
@@ -27,10 +29,20 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import style from "./css.js";
 
 class Home extends Component {
-  state = { addr: "" };
+  state = { addr: "", error: null };
+  componentDidMount() {
+    this.setState({ error: this.props.dashboard.UI.error });
+    this.props.dashboard.UI.error = null;
+  }
   handleSubmit = event => {
-    this.props.updateAddr(this.state.addr);
-    this.props.updateRoute(Routes.DASHBOARD);
+    var reg = /[^A-Za-z0-9]+/g;
+    if (this.state.addr !== "" && !reg.test(this.state.addr)) {
+      console.log(reg.test(this.state.addr));
+      this.props.updateAddr(this.state.addr);
+      this.props.updateRoute(Routes.DASHBOARD);
+    } else {
+      this.error = "";
+    }
     event.preventDefault();
   };
   handleChange = event => {
@@ -50,9 +62,10 @@ class Home extends Component {
           <Typography variant="h5" align="center">
             Hello World
           </Typography>
-          <FormControl margin="normal" fullWidth>
+          <FormControl error={this.state.error === null ? false : true} margin="normal" fullWidth>
             <InputLabel>Ethereum Public Address</InputLabel>
             <Input name="addr" value={this.state.addr} onChange={this.handleChange} />
+            <FormHelperText>{this.state.error}</FormHelperText>
           </FormControl>
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
@@ -68,8 +81,8 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => ({
-  addr: state.addr,
-  route: state.route
+  route: state.route,
+  dashboard: state.dashboard
 });
 
 const mapDispatchToProps = dispatch => ({

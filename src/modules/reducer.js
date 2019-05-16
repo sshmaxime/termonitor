@@ -8,7 +8,9 @@ const initialState = {
   },
   dashboard: {
     UI: {
-      isLoading: true
+      isLoading: true,
+      isReady: false,
+      error: null
     },
     data: {
       currentStatistics: {
@@ -25,8 +27,7 @@ const initialState = {
       statistics: null,
       minPayout: null,
       balance: null
-    },
-    error: null
+    }
   }
 };
 
@@ -56,6 +57,8 @@ const globalReducer = (state = initialState, action) => {
         store = dashboardPending(store, payload);
       else if (subType === ACTIONS.Types.FETCH_DATA_DASHBOARD_FULFILLED)
         store = dashboardFulfilled(store, payload);
+      else if (subType === ACTIONS.Types.FETCH_DATA_DASHBOARD_ERROR)
+        store = dashboardError(store, payload);
 
       newState.dashboard = store;
       return newState;
@@ -97,6 +100,13 @@ const dashboardFulfilled = (store, payload) => {
   store.data.balance = (payloadWallet.result / 1000000000000000000).toFixed(2) + " ETH";
 
   store.UI.isLoading = false;
+  store.UI.isReady = true;
+  return store;
+};
+
+const dashboardError = (store, payload) => {
+  let newError = payload.error;
+  store.UI.error = newError;
   return store;
 };
 
