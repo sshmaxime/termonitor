@@ -1,16 +1,18 @@
 import Axios from "axios";
 
-const apiEndpoint = "https://api.ethermine.org/";
-
+const apiMinersEndpoint = "https://api.ethermine.org/";
+const apiWalletEndpoint =
+  "https://api.etherscan.io/api?module=account&action=balance&tag=latest&address=";
 // Types of action
 const Types = {
   UPDATE_USERNAME: "UPDATE_USERNAME",
   UPDATE_ROUTE: "UPDATE_ROUTE",
 
+  // DASHBOARD
   FETCH_DATA_DASHBOARD: "FETCH_DATA_DASHBOARD",
   FETCH_DATA_DASHBOARD_PENDING: "FETCH_DATA_DASHBOARD_PENDING",
-  FETCH_DATA_DASHBOARD_FULFILLED: "FETCH_DATA_DASHBOARD_FULFILLED",
-  FETCH_DATA_DASHBOARD_REJECTED: "FETCH_DATA_DASHBOARD_REJECTED"
+  FETCH_DATA_DASHBOARD_FULFILLED: "FETCH_DATA_DASHBOARD_FULFILLED"
+  ////////////
 };
 
 // Actions
@@ -23,26 +25,31 @@ const updateRoute = route => ({
   payload: route
 });
 
+///////////////////////////
+// DASHBOARD MAIN ACTION //
+///////////////////////////
 const fetchDataDashboard = () => (dispatch, getState) => {
-  dispatch({ type: Types.FETCH_DATA_DASHBOARD, subType: Types.FETCH_DATA_DASHBOARD_PENDING });
+  // PENDING
+  dispatch({
+    type: Types.FETCH_DATA_DASHBOARD,
+    subType: Types.FETCH_DATA_DASHBOARD_PENDING
+  });
+  const urlMiners = apiMinersEndpoint + "miner/" + getState().userData.ethAddr + "/dashboard/";
+  const urlWallet = apiWalletEndpoint + getState().userData.ethAddr;
 
-  const url = apiEndpoint + "miner/" + getState().userData.ethAddr + "/dashboard/";
-
-  return Axios.get(url)
-    .then(data => {
+  Axios.all([Axios.get(urlMiners), Axios.get(urlWallet)]).then(
+    Axios.spread((_dataMiners, _dataWallet) => {
+      // DATA
       dispatch({
         type: Types.FETCH_DATA_DASHBOARD,
         subType: Types.FETCH_DATA_DASHBOARD_FULFILLED,
-        payload: data.data.data
+        payload: {
+          dataMiners: _dataMiners.data.data,
+          dataWallet: _dataWallet.data
+        }
       });
     })
-    .catch(error => {
-      dispatch({
-        type: Types.FETCH_DATA_DASHBOARD,
-        subType: Types.FETCH_DATA_DASHBOARD_REJECTED,
-        payload: error.message || "Unexpected Error!!!"
-      });
-    });
+  );
 };
 
 export default {

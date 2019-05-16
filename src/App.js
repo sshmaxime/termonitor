@@ -26,6 +26,11 @@ const style = theme => ({
 });
 
 class App extends Component {
+  componentDidMount() {
+    if (this.props.userData.ethAddr) {
+      this.props.updateRoute(Routes.DASHBOARD);
+    }
+  }
   handleHomeSubmit = event => {
     this.props.updateRoute(Routes.DASHBOARD);
   };
