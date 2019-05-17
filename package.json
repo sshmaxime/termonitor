@@ -67,7 +67,7 @@
     ]
   },
   "build": {
-    "appId": "com.electron.electron-with-create-react-app",
+    "appId": "com.electron.termonitor",
     "directories": {
       "buildResources": "public"
     }
