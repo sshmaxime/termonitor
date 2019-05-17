@@ -29,16 +29,16 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import style from "./css.js";
 
 class Home extends Component {
-  state = { addr: "", error: null };
+  state = { addr: "", error: null, doSave: false };
   componentDidMount() {
     this.setState({ error: this.props.dashboard.UI.error });
     this.props.dashboard.UI.error = null;
+    this.props.dashboard.UI.isReady = false;
   }
   handleSubmit = event => {
     var reg = /[^A-Za-z0-9]+/g;
     if (this.state.addr !== "" && !reg.test(this.state.addr)) {
-      console.log(reg.test(this.state.addr));
-      this.props.updateAddr(this.state.addr);
+      this.props.updateAddr(this.state.addr, this.state.doSave);
       this.props.updateRoute(Routes.DASHBOARD);
     } else {
       this.error = "";
@@ -48,6 +48,11 @@ class Home extends Component {
   handleChange = event => {
     this.setState({
       [event.target.name]: event.target.value
+    });
+  };
+  handleChangeCheck = event => {
+    this.setState({
+      doSave: event.target.checked
     });
   };
 
@@ -68,7 +73,14 @@ class Home extends Component {
             <FormHelperText>{this.state.error}</FormHelperText>
           </FormControl>
           <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
+            control={
+              <Checkbox
+                checked={this.state.doSave}
+                onChange={this.handleChangeCheck}
+                value="remember"
+                color="primary"
+              />
+            }
             label="Remember me"
           />
           <Button type="submit" fullWidth variant="contained" color="primary">
@@ -86,7 +98,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateAddr: username => dispatch(ACTIONS.updateAddr(username)),
+  updateAddr: (username, doSave) => dispatch(ACTIONS.updateAddr(username, doSave)),
   updateRoute: route => dispatch(ACTIONS.updateRoute(route))
 });
 

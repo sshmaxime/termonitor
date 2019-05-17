@@ -6,7 +6,16 @@ const isDev = require("electron-is-dev");
 let mainWindow;
 
 function createWindow() {
-  mainWindow = new BrowserWindow({ width: 900, height: 680 });
+  mainWindow = new BrowserWindow({
+    width: 800,
+    height: 700,
+    minWidth: 800,
+    minHeight: 700,
+    webPreferences: {
+      nodeIntegration: true
+    },
+    backgroundColor: "#1e1e2f"
+  });
   mainWindow.loadURL(
     isDev ? process.env.ELECTRON_START_URL : `file://${path.join(__dirname, "../build/index.html")}`
   );

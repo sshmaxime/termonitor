@@ -1,10 +1,13 @@
 import ACTIONS from "./action";
 import _ from "lodash";
 
+const Store = window.require("electron-store");
+const store = new Store();
+
 const initialState = {
   route: "/",
   userData: {
-    ethAddr: "" //***REMOVED***
+    ethAddr: store.get("addr")
   },
   dashboard: {
     UI: {
@@ -35,8 +38,12 @@ const globalReducer = (state = initialState, action) => {
   let newState = _.cloneDeep(state);
   switch (action.type) {
     case ACTIONS.Types.UPDATE_ADDR: {
-      let newAddr = action.payload;
+      let newAddr = action.payload.addr;
+      let doSave = action.payload.doSave;
       newState.userData.ethAddr = newAddr;
+      if (doSave) {
+        store.set("addr", newAddr);
+      }
       return newState;
     }
     case ACTIONS.Types.UPDATE_ROUTE: {

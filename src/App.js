@@ -36,13 +36,14 @@ class App extends Component {
   };
   render() {
     const { classes } = this.props;
+    console.log(this.props.dashboard.UI.isReady);
     return (
       <div>
         <NavBar
           handleButton={this.handleHomeSubmit}
           ethAddr={this.props.userData.ethAddr}
           balance={this.props.data.balance}
-          isReady={this.props.isReady}
+          isReady={this.props.dashboard.UI.isReady}
         />
         <div className={classes.app}>
           {this.props.route === Routes.HOME ? <Home /> : null}
@@ -57,7 +58,7 @@ const mapStateToProps = state => ({
   route: state.route,
   userData: state.userData,
   data: state.dashboard.data,
-  isReady: state.dashboard.UI.isReady
+  dashboard: state.dashboard
 });
 
 const mapDispatchToProps = dispatch => ({

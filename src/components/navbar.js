@@ -8,6 +8,14 @@ import SettingsIcon from "@material-ui/icons/Settings";
 import IconButton from "@material-ui/core/IconButton";
 import { ReactComponent as LogoTermonitor } from "./../img/termonitorW.svg";
 import { ReactComponent as LogoCoin } from "./../img/coin.svg";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import Routes from "../route";
+import ACTIONS from "../modules/action";
+import { connect } from "react-redux";
+
+const Store = window.require("electron-store");
+const store = new Store();
 
 const style = theme => ({
   root: {
@@ -55,6 +63,22 @@ const style = theme => ({
 });
 
 class NavBar extends Component {
+  state = {
+    anchorEl: null
+  };
+  handleClick = event => {
+    this.setState({ anchorEl: event.currentTarget });
+  };
+
+  handleClose = () => {
+    this.setState({ anchorEl: null });
+  };
+
+  handleLogout = () => {
+    this.setState({ anchorEl: null });
+    store.set("addr", "");
+    this.props.updateRoute(Routes.HOME);
+  };
   render() {
     const { classes } = this.props;
     return (
@@ -73,14 +97,28 @@ class NavBar extends Component {
             <Typography variant="h6" color="inherit" className={classes.grow}>
               TERMONITOR
             </Typography>
-            {this.props.isReady ? (
+            {this.props.dashboard.UI.isReady ? (
               <React.Fragment>
                 <LogoCoin className={classes.coinIcon} />
                 <Typography className={classes.balance}>{this.props.balance}</Typography>
                 <Typography className={classes.addr}>{this.props.ethAddr}</Typography>
-                <IconButton className={classes.margin}>
+                <IconButton
+                  aria-owns={this.state.anchorEl ? "simple-menu" : undefined}
+                  aria-haspopup="true"
+                  onClick={this.handleClick}
+                  className={classes.margin}
+                >
                   <SettingsIcon fontSize="large" className={classes.settingsIcon} />
                 </IconButton>
+                <Menu
+                  id="simple-menu"
+                  anchorEl={this.state.anchorEl}
+                  open={Boolean(this.state.anchorEl)}
+                  onClose={this.handleClose}
+                >
+                  {/* <MenuItem onClick={this.handleClose}>Settings</MenuItem> */}
+                  <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
+                </Menu>
               </React.Fragment>
             ) : null}
           </Toolbar>
@@ -90,8 +128,19 @@ class NavBar extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  dashboard: state.dashboard
+});
+
+const mapDispatchToProps = dispatch => ({
+  updateRoute: route => dispatch(ACTIONS.updateRoute(route))
+});
+
 NavBar.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(style)(NavBar);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(style)(NavBar));

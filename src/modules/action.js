@@ -17,9 +17,12 @@ const Types = {
 };
 
 // Actions
-const updateAddr = addr => ({
+const updateAddr = (_addr, _doSave) => ({
   type: Types.UPDATE_ADDR,
-  payload: addr
+  payload: {
+    addr: _addr,
+    doSave: _doSave
+  }
 });
 const updateRoute = route => ({
   type: Types.UPDATE_ROUTE,
