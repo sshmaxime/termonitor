@@ -8,8 +8,8 @@
     "animejs": "^3.0.1",
     "apexcharts": "^3.6.11",
     "axios": "^0.18.0",
-    "electron": "^5.0.1",
-    "electron-builder": "^20.39.0",
+    "cross-env": "^5.2.0",
+    "electron-is-dev": "^1.1.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.17.2",
@@ -29,19 +29,22 @@
     "redux-thunk": "^2.3.0",
     "typescript": "^3.4.5"
   },
+  "devDependencies": {
+    "concurrently": "^4.1.0",
+    "electron": "^5.0.1",
+    "electron-builder": "^20.40.2",
+    "wait-on": "^3.2.0"
+  },
   "homepage": "./",
-  "main": "src/start.js",
+  "main": "public/electron.js",
   "scripts": {
     "start": "nf start -p 3000",
-    "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "electron": "electron .",
-    "electron-start": "node src/start-react",
-    "react-start": "BROWSER=none react-scripts start",
-    "pack": "build --dir",
-    "dist": "npm run build && build",
-    "postinstall": "install-app-deps"
+    "react-build": "react-scripts build",
+    "react-eject": "react-scripts eject",
+    "electron-build": "electron-builder",
+    "release": "yarn react-build && electron-builder --publish=always",
+    "build": "yarn react-build && yarn electron-build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -60,9 +63,6 @@
   },
   "build": {
     "appId": "com.electron.electron-with-create-react-app",
-    "win": {
-      "iconUrl": "https://cdn2.iconfinder.com/data/icons/designer-skills/128/react-256.png"
-    },
     "directories": {
       "buildResources": "public"
     }
