@@ -36,7 +36,6 @@ class App extends Component {
   };
   render() {
     const { classes } = this.props;
-    console.log(this.props.dashboard.UI.isReady);
     return (
       <div>
         <NavBar
