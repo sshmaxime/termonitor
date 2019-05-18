@@ -22,3 +22,18 @@
 <a href="https://github.com/MaximeAubanel/termonitor" alt="Love">
   <img src="https://img.shields.io/badge/made%20with-LOVE-brightgreen.svg?style=flat&logo=Javascript" /></a>
 </p>
+
+**termonitor** is an open-source cross-platform software that aim to help mining rigs monitoring and much more.
+
+## Pool Supported
+* Ethermine
+
+## Features
+* 24h charts, Reported/Current hashrate,
+* Current Active miners,
+* Current Reported hashrate,
+* Current Unpaid balance,
+* Current Wallet Eth balance,
+* Auto-Update every 3 minutes
+
+## Download [Here](https://github.com/MaximeAubanel/termonitor/releases)
