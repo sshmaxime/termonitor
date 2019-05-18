@@ -49,7 +49,7 @@
     "electron-build": "electron-builder",
     "release": "yarn react-build && electron-builder --publish=always",
     "build": "yarn react-build && yarn electron-build",
-    "build-all": "electron-builder -mwl"
+    "build-all": "yarn react-build && yarn electron-builder -mwl"
   },
   "eslintConfig": {
     "extends": "react-app"
