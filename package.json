@@ -1,5 +1,11 @@
 {
   "name": "termonitor",
+  "author": {
+    "name": "Maxime Aubanel",
+    "email": "maximeauba@gmail.com"
+  },
+  "description": "Mining rig monitor.",
+  "repository": "https://github.com/MaximeAubanel/termonitor",
   "version": "0.1.0-alpha",
   "private": true,
   "dependencies": {
