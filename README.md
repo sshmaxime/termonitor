@@ -23,6 +23,11 @@
   <img src="https://img.shields.io/badge/made%20with-LOVE-brightgreen.svg?style=flat&logo=Javascript" /></a>
 </p>
 
+<p align="center">
+    <img src="./src/img/screenshot.png"
+        height="700">
+</p>
+
 **termonitor** is an open-source cross-platform software that aim to help mining rigs monitoring and much more.
 
 ## Pool Supported
